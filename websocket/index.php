@@ -86,8 +86,6 @@
 
 
 	<script src="jquery-3.1.1.js"></script>
-
-
 	<script src="custom.js"></script>
 	<div class="chat_wrapper">
 	    <div class="message_box" id="message_box"></div>

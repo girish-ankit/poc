@@ -3,6 +3,8 @@
 $host = '192.168.1.250'; //host
 $port = '9000'; //port
 $null = NULL; //null var
+//// don't timeout!
+set_time_limit(0);
 //Create TCP/IP sream socket
 $socket = socket_create(AF_INET, SOCK_STREAM, SOL_TCP);
 //reuseable port
