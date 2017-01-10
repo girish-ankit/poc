@@ -1,0 +1,35 @@
+#1>.
+Open flle /etc/sysconfig/iptables:
+
+# vi /etc/sysconfig/iptables
+
+
+#2>. Open port of iptable
+
+if you want to open an incoming TCP port, type the following:
+
+iptables -I INPUT -p tcp --dport 12345 --syn -j ACCEPT
+
+If you want to open a UDP port (perhaps for DHT in Tixati), type the following:
+
+iptables -I INPUT -p udp --dport 12345 -j ACCEPT
+
+#3>. save you port entry to iptable: 
+
+service iptables save
+
+#4>. restart iptable service:
+
+/etc/init.d/iptables restart
+
+or service iptables restart
+
+#5>. Verify that port is open
+
+Run following command:
+
+# netstat -tulpn | less
+
+Make sure iptables is allowing port connections:
+
+# iptables -L -n
