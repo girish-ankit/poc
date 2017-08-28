@@ -86,11 +86,11 @@
 
 
 	<script src="jquery-3.1.1.js"></script>
-	<script src="custom.js"></script>
+	<script src="admin.js"></script>
 	<div class="chat_wrapper">
 	    <div class="message_box" id="message_box"></div>
 	    <div class="panel">
-		<input type="text" name="name" id="name" placeholder="Your Name" maxlength="15" />
+		<!--<input type="text" name="name" id="name" placeholder="Your Name" maxlength="15" /> -->
 
 		<input type="text" name="message" id="message" placeholder="Message" maxlength="80"
 		       onkeydown = "if (event.keyCode == 13)

@@ -1,6 +1,6 @@
  $(document).ready(function () {
                 //create a new WebSocket object.
-                var wsUri = "ws://192.168.1.250:9000/demo/server.php";
+                var wsUri = "ws://192.168.1.250:9000/server.php";
                 websocket = new WebSocket(wsUri);
 
                 websocket.onopen = function (ev) { // connection is open
@@ -19,14 +19,14 @@
                         alert("Enter Some message Please!");
                         return;
                     }
-                    document.getElementById("name").style.visibility = "hidden";
+                    //document.getElementById("name").style.visibility = "hidden";
 
                     var objDiv = document.getElementById("message_box");
                     objDiv.scrollTop = objDiv.scrollHeight;
                     //prepare json data
                     var msg = {
                         message: mymessage,
-                        name: myname,
+                        name: 'My Code',
                         color: '<?php echo $colours[$user_colour]; ?>'
                     };
                     //convert and send data to server
@@ -40,6 +40,7 @@
                     var umsg = msg.message; //message text
                     var uname = msg.name; //user name
                     var ucolor = msg.color; //color
+                    console.log('hii '+umsg);
 
                     if (type == 'usermsg')
                     {

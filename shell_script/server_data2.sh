@@ -2,7 +2,7 @@
 
 #!/bin/env bash
 while [ true ]; do
- sleep 5
+ sleep 1
 now="$(date)"
 printf "%s, " "$now"
 free -m | awk 'NR==2{printf "Memory Usage: %s/%sMB (%.2f%%), ", $3,$2,$3*100/$2 }'

@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL ^ E_NOTICE);
+
+
 // websocket server
 
 $host = '192.168.1.250'; //host
@@ -32,6 +35,7 @@ while (true) {
     if (in_array($socket, $changed)) {
 	$socket_new = socket_accept($socket); //accpet new socket
 	$clients[] = $socket_new; //add socket to client array
+	echo 'Number of clients: ' . (count($clients) - 1) . "\n";
 
 	$header = socket_read($socket_new, 1024); //read data sent by the socket
 	perform_handshaking($header, $socket_new, $host, $port); //perform websocket handshake
@@ -55,7 +59,27 @@ while (true) {
 	    $user_message = $tst_msg->message; //message text
 	    $user_color = $tst_msg->color; //color
 	    //prepare data to be sent to client
-	    $response_text = mask(json_encode(array('type' => 'usermsg', 'name' => $user_name, 'message' => '3 ' . $user_message, 'color' => $user_color)));
+
+	    $user_name = 'Message Code';
+
+
+	    $user_message = (int) $user_message;
+
+
+	    if ($user_message == 1) {
+
+		$response_text = mask(json_encode(array('type' => 'index', 'name' => $user_name, 'message' => $user_message, 'color' => $user_color)));
+	    } elseif ($user_message == 2) {
+
+		$response_text = mask(json_encode(array('type' => 'event', 'name' => $user_name, 'message' => $user_message, 'color' => $user_color)));
+	    } elseif ($user_message == 3) {
+
+		$response_text = mask(json_encode(array('type' => 'thanks', 'name' => $user_name, 'message' => $user_message, 'color' => $user_color)));
+	    } else {
+		$response_text = mask(json_encode(array('type' => 'usermsg', 'name' => $user_name, 'message' => $user_message, 'color' => $user_color)));
+	    }
+
+
 	    send_message($response_text); //send data
 	    break 2; //exist this loop
 	}
@@ -64,7 +88,7 @@ while (true) {
 	if ($buf === false) { // check disconnected client
 	    // remove client for $clients array
 	    $found_socket = array_search($changed_socket, $clients);
-	    socket_getpeername($changed_socket, $ip);
+	    //  socket_getpeername($changed_socket, $ip);
 	    unset($clients[$found_socket]);
 
 	    //notify all users about disconnected connection

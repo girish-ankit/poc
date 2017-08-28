@@ -1,0 +1,37 @@
+#1>. 
+a>. System IP:=> 
+	192.168.1.250
+b>. Test url:
+    http://dbi-poc.com/
+
+#2>. Restart Service:=>
+
+sudo service httpd restart
+sudo service mysqld restart
+sudo service nginx restart
+
+
+
+#3>. Run script to test server load:=>
+
+/var/www/html/poc/shell_script/server_data2.sh >> /var/www/html/poc/logs/server_data2.csv
+
+#4>. Websocket server script :=>
+
+php /var/www/html/poc/websocket_event_demo/server.php
+
+
+#5>. Truncate log files:=>
+
+cat /dev/null > /var/www/html/poc/logs/error.log  > /var/www/html/poc/logs/requests.log  > /var/www/html/poc/logs/server_data2.csv
+
+#6>. Check server log using command:=>
+
+tail -f /var/www/html/poc/logs/server_data2.csv
+tail -f /var/www/html/poc/logs/requests.log
+
+
+#7>. check trafic on port 9000:=>
+
+
+netstat -antu | grep :9000 | grep -v LISTEN
